@@ -58,7 +58,13 @@ export class PasswordGeneratorComponent {
   includeSymbols: boolean = false;
   generatedPassword: string = '';
 
+  // Load sound files
+  private generateSound = new Audio('/assets/Sounds/pen-click.mp3');
+  // private copySound = new Audio('/assets/Sounds/pen-click.mp3');
+
   generatePassword() {
+    this.generateSound.play(); // Play generate sound
+
     let charset = 'abcdefghijklmnopqrstuvwxyz';
     if (this.includeUppercase) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if (this.includeNumbers) charset += '0123456789';
@@ -75,6 +81,8 @@ export class PasswordGeneratorComponent {
   copyToClipboard() {
     navigator.clipboard.writeText(this.generatedPassword).then(() => {
       // alert('Password copied to clipboard!');
+      // this.copySound.play(); // Play copy sound
+
       const toast = document.getElementById("toast")!;
       toast.classList.add("show");
       
